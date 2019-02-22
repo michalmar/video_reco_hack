@@ -1,4 +1,5 @@
 conda create --name py36vidhack --clone py36test
+conda create --name py36vidhack python=3.6
 
 activate py36vidhack
 pip install ipykernel
@@ -7,3 +8,7 @@ pip install imutils
 
 
 python -m ipykernel install --user  --name py36vidhack --display-name "Python 3 (py36vidhack)"
+
+
+python yolo_video.py --input videos/videoplayback-320p-short.mp4 --output output/videoplayback-320p-short.avi --yolo yolo-coco
+
