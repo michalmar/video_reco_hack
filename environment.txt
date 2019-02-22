@@ -5,7 +5,7 @@ activate py36vidhack
 pip install ipykernel
 pip install opencv-python
 pip install imutils
-
+pip install pipreqs
 
 python -m ipykernel install --user  --name py36vidhack --display-name "Python 3 (py36vidhack)"
 
