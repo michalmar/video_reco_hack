@@ -1,0 +1,9 @@
+conda create --name py36vidhack --clone py36test
+
+activate py36vidhack
+pip install ipykernel
+pip install opencv-python
+pip install imutils
+
+
+python -m ipykernel install --user  --name py36vidhack --display-name "Python 3 (py36vidhack)"
