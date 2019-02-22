@@ -19,12 +19,13 @@ import os
 import datetime  
 import time
 
+vid_file = "videoplayback-320p-short"
 # Playing video from file:
-cap = cv2.VideoCapture('data/videoplayback-720p.mp4')
+cap = cv2.VideoCapture('../data/'+vid_file+'.mp4')
 
 try:
-    if not os.path.exists('data'):
-        os.makedirs('data')
+    if not os.path.exists('../data'):
+        os.makedirs('../data')
 except OSError:
     print ('Error: Creating directory of data')
 
@@ -43,14 +44,14 @@ myTime = datetime.datetime(2019, 2, 1)
 
 
 currentFrame = 0
-while(currentFrame < 1000):
+while(currentFrame < 800):
     # Capture frame-by-frame
     ret, frame = cap.read()
     print("{} {}".format(currentFrame, currentFrame % 25))
     if (currentFrame % 25 == 0):
         myTime = myTime + datetime.timedelta(0,1) # days, seconds, then other fields.
     # Saves image of the current frame in jpg file
-    name = './data/frame' + str(currentFrame).zfill(5) + '_at_'+ myTime.strftime("%H-%M-%S") +'.jpg'
+    name = '../data/'+vid_file+'_' + str(currentFrame).zfill(5) + '_at_'+ myTime.strftime("%H-%M-%S") +'.jpg'
     print ('Creating...' + name)
     cv2.imwrite(name, frame)
 
