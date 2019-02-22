@@ -1,3 +1,5 @@
 data/
 yolo-object-detection/output/
 yolo-object-detection/videos/
+yolo-object-detection/images/
+yolo-object-detection/yolo-coco/
