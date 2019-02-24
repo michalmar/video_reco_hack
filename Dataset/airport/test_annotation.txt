@@ -1,0 +1,5 @@
+Dataset/airport/test/videoplayback-320p-short_00214_at_00-00-09.jpg,372,168,413,190,steps
+Dataset/airport/test/videoplayback-320p-short_00229_at_00-00-10.jpg,373,168,423,192,steps
+Dataset/airport/test/videoplayback-320p-short_00252_at_00-00-11.jpg,422,238,448,243,steps
+Dataset/airport/test/videoplayback-320p-short_00256_at_00-00-11.jpg,379,162,465,228,steps
+Dataset/airport/test/videoplayback-320p-short_00217_at_00-00-09.jpg,373,169,418,192,steps

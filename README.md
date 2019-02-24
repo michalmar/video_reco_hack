@@ -23,4 +23,5 @@
     
     `cd video_reco_hack/yolo-object-detection`
 
+    `wget https://pjreddie.com/media/files/yolov3.weights`
     `python yolo_video.py --input videos/videoplayback-320p-short.mp4 --output output/videoplayback-320p-short.avi --yolo yolo-coco`
