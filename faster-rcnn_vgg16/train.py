@@ -151,4 +151,4 @@ print(len(record_df))
 train(C)
 
 # In[ ]:
-display_after_training(record_df)
+display_after_training(C, record_df)
