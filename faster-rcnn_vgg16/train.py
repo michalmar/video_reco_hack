@@ -137,9 +137,9 @@ C.rpn_accuracy_rpn_monitor = []
 C.rpn_accuracy_for_epoch = []
 
 if len(record_df)==0:
-    best_loss = np.Inf
+    C.best_loss = np.Inf
 else:
-    best_loss = np.min(r_curr_loss)
+    C.best_loss = np.min(r_curr_loss)
 
 
 # In[28]:
