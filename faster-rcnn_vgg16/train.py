@@ -1,4 +1,4 @@
-from utils_train import get_data, get_anchor_gt, display_image, model_init, train, display_after_training
+from utils_train import get_data, get_anchor_gt, display_image, model_init, train, display_after_training, get_img_output_length
 from utils_train import Config
 import os
 import time
