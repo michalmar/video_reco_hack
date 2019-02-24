@@ -122,15 +122,15 @@ display_image(X, Y, image_data, debug_img, debug_num_pos, C)
 
 # Training setting
 total_epochs = len(record_df)
-r_epochs = len(record_df)
+C.r_epochs = len(record_df)
 
-epoch_length = 40
-num_epochs = 20
-iter_num = 0
+C.epoch_length = 40
+C.num_epochs = 20
+C.iter_num = 0
 
-total_epochs += num_epochs
+C.total_epochs += C.num_epochs
 
-losses = np.zeros((epoch_length, 5))
+losses = np.zeros((C.epoch_length, 5))
 rpn_accuracy_rpn_monitor = []
 rpn_accuracy_for_epoch = []
 

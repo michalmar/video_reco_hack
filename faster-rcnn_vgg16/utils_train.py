@@ -1283,12 +1283,12 @@ def display_image(X, Y, image_data, debug_img, debug_num_pos, C):
 
 def train(C):
     start_time = time.time()
-    for epoch_num in range(num_epochs):
+    for epoch_num in range(C.num_epochs):
 
-        progbar = generic_utils.Progbar(epoch_length)
-        print('Epoch {}/{}'.format(r_epochs + 1, total_epochs))
+        progbar = generic_utils.Progbar(C.epoch_length)
+        print('Epoch {}/{}'.format(r_epochs + 1, C.total_epochs))
         
-        r_epochs += 1
+        C.r_epochs += 1
 
         while True:
             try:
