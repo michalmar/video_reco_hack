@@ -1511,7 +1511,7 @@ def model_init(C, classes_count):
     model_classifier.compile(optimizer=optimizer_classifier, loss=[class_loss_cls, class_loss_regr(len(classes_count)-1)], metrics={'dense_class_{}'.format(len(classes_count)): 'accuracy'})
     model_all.compile(optimizer='sgd', loss='mae')
 
-    return model_all
+    return (model_all,record_df)
 
 def display_after_training(record_df):
         
