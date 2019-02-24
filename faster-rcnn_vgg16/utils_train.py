@@ -1428,7 +1428,7 @@ def train(C, data_gen_train, record_df):
                             'mAP': 0}
 
                     record_df = record_df.append(new_row, ignore_index=True)
-                    record_df.to_csv(record_path, index=0)
+                    record_df.to_csv(C.record_path, index=0)
 
                     break
 
@@ -1488,7 +1488,7 @@ def model_init(C):
         model_classifier.load_weights(C.model_path, by_name=True)
         
         # Load the records
-        record_df = pd.read_csv(record_path)
+        record_df = pd.read_csv(C.record_path)
 
         r_mean_overlapping_bboxes = record_df['mean_overlapping_bboxes']
         r_class_acc = record_df['class_acc']
