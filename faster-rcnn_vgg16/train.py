@@ -58,7 +58,7 @@ C.base_net_weights = base_weight_path
 # This step will spend some time to load the data        #
 #--------------------------------------------------------#
 st = time.time()
-train_imgs, classes_count, class_mapping = get_data(train_path)
+train_imgs, C.classes_count, C.class_mapping = get_data(train_path)
 print()
 print('Spend %0.2f mins to load the data' % ((time.time()-st)/60) )
 
@@ -66,18 +66,18 @@ print('Spend %0.2f mins to load the data' % ((time.time()-st)/60) )
 # In[19]:
 
 
-if 'bg' not in classes_count:
-	classes_count['bg'] = 0
-	class_mapping['bg'] = len(class_mapping)
+if 'bg' not in C.classes_count:
+	C.classes_count['bg'] = 0
+	C.class_mapping['bg'] = len(C.class_mapping)
 # e.g.
 #    classes_count: {'Car': 2383, 'Mobile phone': 1108, 'Person': 3745, 'bg': 0}
 #    class_mapping: {'Person': 0, 'Car': 1, 'Mobile phone': 2, 'bg': 3}
-C.class_mapping = class_mapping
+C.class_mapping = C.class_mapping
 
 print('Training images per class:')
-pprint.pprint(classes_count)
-print('Num classes (including bg) = {}'.format(len(classes_count)))
-print(class_mapping)
+pprint.pprint(C.classes_count)
+print('Num classes (including bg) = {}'.format(len(C.classes_count)))
+print(C.class_mapping)
 
 # Save the configuration
 with open(config_output_filename, 'wb') as config_f:
@@ -116,7 +116,7 @@ display_image(X, Y, image_data, debug_img, debug_num_pos, C)
 
 # In[24]:
 
-(C.model_all, C.model_rpn, C.model_classifier, record_df) = model_init(C,classes_count)
+(C.model_all, C.model_rpn, C.model_classifier, record_df) = model_init(C)
 # In[27]:
 
 

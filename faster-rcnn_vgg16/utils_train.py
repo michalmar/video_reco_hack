@@ -1317,7 +1317,7 @@ def train(C, data_gen_train):
                 # X2: bboxes that iou > C.classifier_min_overlap for all gt bboxes in 300 non_max_suppression bboxes
                 # Y1: one hot code for bboxes from above => x_roi (X)
                 # Y2: corresponding labels and corresponding gt bboxes
-                X2, Y1, Y2, IouS = calc_iou(R, img_data, C, class_mapping)
+                X2, Y1, Y2, IouS = calc_iou(R, img_data, C, C.class_mapping)
 
                 # If X2 is None means there are no matching bboxes
                 if X2 is None:
@@ -1439,7 +1439,7 @@ def train(C, data_gen_train):
     print('Training complete, exiting.')
 
 
-def model_init(C, classes_count):
+def model_init(C):
 
     input_shape_img = (None, None, 3)
 
@@ -1457,7 +1457,7 @@ def model_init(C, classes_count):
     num_anchors = len(C.anchor_box_scales) * len(C.anchor_box_ratios) # 9
     rpn = rpn_layer(shared_layers, num_anchors)
 
-    classifier = classifier_layer(shared_layers, roi_input, C.num_rois, nb_classes=len(classes_count))
+    classifier = classifier_layer(shared_layers, roi_input, C.num_rois, nb_classes=len(C.classes_count))
 
     model_rpn = Model(img_input, rpn[:2])
     model_classifier = Model([img_input, roi_input], classifier)
@@ -1508,7 +1508,7 @@ def model_init(C, classes_count):
     optimizer = Adam(lr=1e-5)
     optimizer_classifier = Adam(lr=1e-5)
     model_rpn.compile(optimizer=optimizer, loss=[rpn_loss_cls(num_anchors), rpn_loss_regr(num_anchors)])
-    model_classifier.compile(optimizer=optimizer_classifier, loss=[class_loss_cls, class_loss_regr(len(classes_count)-1)], metrics={'dense_class_{}'.format(len(classes_count)): 'accuracy'})
+    model_classifier.compile(optimizer=optimizer_classifier, loss=[class_loss_cls, class_loss_regr(len(C.classes_count)-1)], metrics={'dense_class_{}'.format(len(C.classes_count)): 'accuracy'})
     model_all.compile(optimizer='sgd', loss='mae')
 
     return (model_all, model_rpn, model_classifier, record_df)
