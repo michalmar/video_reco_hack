@@ -5,7 +5,7 @@ import time
 import random
 import pprint
 import pickle
-import numbpy as np
+import numpy as np
 
 
 # ### Start training
