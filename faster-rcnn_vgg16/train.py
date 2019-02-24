@@ -121,7 +121,7 @@ display_image(X, Y, image_data, debug_img, debug_num_pos, C)
 
 
 # Training setting
-total_epochs = len(record_df)
+C.total_epochs = len(record_df)
 C.r_epochs = len(record_df)
 
 C.epoch_length = 40
