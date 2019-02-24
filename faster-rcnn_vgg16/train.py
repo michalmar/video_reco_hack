@@ -111,12 +111,12 @@ data_gen_train = get_anchor_gt(train_imgs, C, get_img_output_length, mode='train
 
 X, Y, image_data, debug_img, debug_num_pos = next(data_gen_train)
 
-display_image(X, Y, image_data, debug_img, debug_num_pos)
+display_image(X, Y, image_data, debug_img, debug_num_pos, C)
 # #### Build the model
 
 # In[24]:
 
-model_all = model_init()
+model_all = model_init(C)
 # In[27]:
 
 
@@ -148,7 +148,7 @@ print(len(record_df))
 
 # In[ ]:
 
-train()
+train(C)
 
 # In[ ]:
 display_after_training(record_df)

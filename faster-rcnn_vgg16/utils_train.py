@@ -1201,7 +1201,7 @@ def rpn_to_roi(rpn_layer, regr_layer, C, dim_ordering, use_regr=True, max_boxes=
 
 #######################################################
 
-def display_image(X, Y, image_data, debug_img, debug_num_pos):
+def display_image(X, Y, image_data, debug_img, debug_num_pos, C):
     # In[23]:
 
 
@@ -1281,7 +1281,7 @@ def display_image(X, Y, image_data, debug_img, debug_num_pos):
     plt.imshow(img)
     plt.show()
 
-def train():
+def train(C):
     start_time = time.time()
     for epoch_num in range(num_epochs):
 
@@ -1439,7 +1439,7 @@ def train():
     print('Training complete, exiting.')
 
 
-def model_init():
+def model_init(C):
 
     input_shape_img = (None, None, 3)
 
