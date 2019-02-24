@@ -1374,19 +1374,19 @@ def train(C, data_gen_train):
                 #  Y2[:, sel_samples, :] => labels and gt bboxes for num_rois bboxes which contains selected neg and pos
                 loss_class = C.model_classifier.train_on_batch([X, X2[:, sel_samples, :]], [Y1[:, sel_samples, :], Y2[:, sel_samples, :]])
 
-                C.losses[C.itern_num, 0] = loss_rpn[1]
-                C.losses[C.itern_num, 1] = loss_rpn[2]
+                C.losses[C.iter_num, 0] = loss_rpn[1]
+                C.losses[C.iter_num, 1] = loss_rpn[2]
 
-                C.losses[C.itern_num, 2] = loss_class[1]
-                C.losses[C.itern_num, 3] = loss_class[2]
-                C.losses[C.itern_num, 4] = loss_class[3]
+                C.losses[C.iter_num, 2] = loss_class[1]
+                C.losses[C.iter_num, 3] = loss_class[2]
+                C.losses[C.iter_num, 4] = loss_class[3]
 
-                C.itern_num += 1
+                C.iter_num += 1
 
-                progbar.update(C.itern_num, [('rpn_cls', np.mean(C.losses[:C.itern_num, 0])), ('rpn_regr', np.mean(C.losses[:C.itern_num, 1])),
-                                        ('final_cls', np.mean(C.losses[:C.itern_num, 2])), ('final_regr', np.mean(C.losses[:C.itern_num, 3]))])
+                progbar.update(C.iter_num, [('rpn_cls', np.mean(C.losses[:C.iter_num, 0])), ('rpn_regr', np.mean(C.losses[:C.iter_num, 1])),
+                                        ('final_cls', np.mean(C.losses[:C.iter_num, 2])), ('final_regr', np.mean(C.losses[:C.iter_num, 3]))])
 
-                if C.itern_num == epoch_length:
+                if C.iter_num == epoch_length:
                     loss_rpn_cls = np.mean(C.losses[:, 0])
                     loss_rpn_regr = np.mean(C.losses[:, 1])
                     loss_class_cls = np.mean(C.losses[:, 2])
@@ -1408,7 +1408,7 @@ def train(C, data_gen_train):
                         elapsed_time = (time.time()-start_time)/60
 
                     curr_loss = loss_rpn_cls + loss_rpn_regr + loss_class_cls + loss_class_regr
-                    C.itern_num = 0
+                    C.iter_num = 0
                     start_time = time.time()
 
                     if curr_loss < best_loss:
