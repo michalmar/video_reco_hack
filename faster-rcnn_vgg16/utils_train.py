@@ -1374,24 +1374,24 @@ def train(C, data_gen_train):
                 #  Y2[:, sel_samples, :] => labels and gt bboxes for num_rois bboxes which contains selected neg and pos
                 loss_class = C.model_classifier.train_on_batch([X, X2[:, sel_samples, :]], [Y1[:, sel_samples, :], Y2[:, sel_samples, :]])
 
-                losses[iter_num, 0] = loss_rpn[1]
-                losses[iter_num, 1] = loss_rpn[2]
+                C.losses[iter_num, 0] = loss_rpn[1]
+                C.losses[iter_num, 1] = loss_rpn[2]
 
-                losses[iter_num, 2] = loss_class[1]
-                losses[iter_num, 3] = loss_class[2]
-                losses[iter_num, 4] = loss_class[3]
+                C.losses[iter_num, 2] = loss_class[1]
+                C.losses[iter_num, 3] = loss_class[2]
+                C.losses[iter_num, 4] = loss_class[3]
 
                 iter_num += 1
 
-                progbar.update(iter_num, [('rpn_cls', np.mean(losses[:iter_num, 0])), ('rpn_regr', np.mean(losses[:iter_num, 1])),
-                                        ('final_cls', np.mean(losses[:iter_num, 2])), ('final_regr', np.mean(losses[:iter_num, 3]))])
+                progbar.update(iter_num, [('rpn_cls', np.mean(C.losses[:iter_num, 0])), ('rpn_regr', np.mean(C.losses[:iter_num, 1])),
+                                        ('final_cls', np.mean(C.losses[:iter_num, 2])), ('final_regr', np.mean(C.losses[:iter_num, 3]))])
 
                 if iter_num == epoch_length:
-                    loss_rpn_cls = np.mean(losses[:, 0])
-                    loss_rpn_regr = np.mean(losses[:, 1])
-                    loss_class_cls = np.mean(losses[:, 2])
-                    loss_class_regr = np.mean(losses[:, 3])
-                    class_acc = np.mean(losses[:, 4])
+                    loss_rpn_cls = np.mean(C.losses[:, 0])
+                    loss_rpn_regr = np.mean(C.losses[:, 1])
+                    loss_class_cls = np.mean(C.losses[:, 2])
+                    loss_class_regr = np.mean(C.losses[:, 3])
+                    class_acc = np.mean(C.losses[:, 4])
 
                     mean_overlapping_bboxes = float(sum(C.rpn_accuracy_for_epoch)) / len(C.rpn_accuracy_for_epoch)
                     C.rpn_accuracy_for_epoch = []

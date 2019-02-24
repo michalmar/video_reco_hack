@@ -130,7 +130,7 @@ C.iter_num = 0
 
 C.total_epochs += C.num_epochs
 
-losses = np.zeros((C.epoch_length, 5))
+C.losses = np.zeros((C.epoch_length, 5))
 C.rpn_accuracy_rpn_monitor = []
 C.rpn_accuracy_for_epoch = []
 
