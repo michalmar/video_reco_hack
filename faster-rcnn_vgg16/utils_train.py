@@ -1386,7 +1386,7 @@ def train(C, data_gen_train):
                 progbar.update(C.iter_num, [('rpn_cls', np.mean(C.losses[:C.iter_num, 0])), ('rpn_regr', np.mean(C.losses[:C.iter_num, 1])),
                                         ('final_cls', np.mean(C.losses[:C.iter_num, 2])), ('final_regr', np.mean(C.losses[:C.iter_num, 3]))])
 
-                if C.iter_num == epoch_length:
+                if C.iter_num == C.epoch_length:
                     loss_rpn_cls = np.mean(C.losses[:, 0])
                     loss_rpn_regr = np.mean(C.losses[:, 1])
                     loss_class_cls = np.mean(C.losses[:, 2])
