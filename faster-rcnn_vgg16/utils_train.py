@@ -1281,7 +1281,7 @@ def display_image(X, Y, image_data, debug_img, debug_num_pos, C):
     plt.imshow(img)
     plt.show()
 
-def train(C):
+def train(C, data_gen_train):
     start_time = time.time()
     for epoch_num in range(C.num_epochs):
 
@@ -1293,9 +1293,9 @@ def train(C):
         while True:
             try:
 
-                if len(rpn_accuracy_rpn_monitor) == epoch_length and C.verbose:
+                if len(C.rpn_accuracy_rpn_monitor) == C.epoch_length and C.verbose:
                     mean_overlapping_bboxes = float(sum(rpn_accuracy_rpn_monitor))/len(rpn_accuracy_rpn_monitor)
-                    rpn_accuracy_rpn_monitor = []
+                    C.rpn_accuracy_rpn_monitor = []
                     # print('Average number of overlapping bounding boxes from RPN = {} for {} previous iterations'.format(mean_overlapping_bboxes, epoch_length))
                     if mean_overlapping_bboxes == 0:
                         print('RPN is not producing bounding boxes that overlap the ground truth boxes. Check RPN settings or keep training.')
@@ -1304,10 +1304,10 @@ def train(C):
                 X, Y, img_data, debug_img, debug_num_pos = next(data_gen_train)
 
                 # Train rpn model and get loss value [_, loss_rpn_cls, loss_rpn_regr]
-                loss_rpn = model_rpn.train_on_batch(X, Y)
+                loss_rpn = C.model_rpn.train_on_batch(X, Y)
 
                 # Get predicted rpn from rpn model [rpn_cls, rpn_regr]
-                P_rpn = model_rpn.predict_on_batch(X)
+                P_rpn = C.model_rpn.predict_on_batch(X)
 
                 # R: bboxes (shape=(300,4))
                 # Convert rpn layer to roi bboxes
@@ -1321,8 +1321,8 @@ def train(C):
 
                 # If X2 is None means there are no matching bboxes
                 if X2 is None:
-                    rpn_accuracy_rpn_monitor.append(0)
-                    rpn_accuracy_for_epoch.append(0)
+                    C.rpn_accuracy_rpn_monitor.append(0)
+                    C.rpn_accuracy_for_epoch.append(0)
                     continue
                 
                 # Find out the positive anchors and negative anchors
@@ -1339,8 +1339,8 @@ def train(C):
                 else:
                     pos_samples = []
 
-                rpn_accuracy_rpn_monitor.append(len(pos_samples))
-                rpn_accuracy_for_epoch.append((len(pos_samples)))
+                C.rpn_accuracy_rpn_monitor.append(len(pos_samples))
+                C.rpn_accuracy_for_epoch.append((len(pos_samples)))
 
                 if C.num_rois > 1:
                     # If number of positive anchors is larger than 4//2 = 2, randomly choose 2 pos samples
@@ -1372,7 +1372,7 @@ def train(C):
                 #  X2[:, sel_samples, :] => num_rois (4 in here) bboxes which contains selected neg and pos
                 #  Y1[:, sel_samples, :] => one hot encode for num_rois bboxes which contains selected neg and pos
                 #  Y2[:, sel_samples, :] => labels and gt bboxes for num_rois bboxes which contains selected neg and pos
-                loss_class = model_classifier.train_on_batch([X, X2[:, sel_samples, :]], [Y1[:, sel_samples, :], Y2[:, sel_samples, :]])
+                loss_class = C.model_classifier.train_on_batch([X, X2[:, sel_samples, :]], [Y1[:, sel_samples, :], Y2[:, sel_samples, :]])
 
                 losses[iter_num, 0] = loss_rpn[1]
                 losses[iter_num, 1] = loss_rpn[2]
@@ -1393,8 +1393,8 @@ def train(C):
                     loss_class_regr = np.mean(losses[:, 3])
                     class_acc = np.mean(losses[:, 4])
 
-                    mean_overlapping_bboxes = float(sum(rpn_accuracy_for_epoch)) / len(rpn_accuracy_for_epoch)
-                    rpn_accuracy_for_epoch = []
+                    mean_overlapping_bboxes = float(sum(C.rpn_accuracy_for_epoch)) / len(C.rpn_accuracy_for_epoch)
+                    C.rpn_accuracy_for_epoch = []
 
                     if C.verbose:
                         print('Mean number of bounding boxes from RPN overlapping ground truth boxes: {}'.format(mean_overlapping_bboxes))
@@ -1415,7 +1415,7 @@ def train(C):
                         if C.verbose:
                             print('Total loss decreased from {} to {}, saving weights'.format(best_loss,curr_loss))
                         best_loss = curr_loss
-                        model_all.save_weights(C.model_path)
+                        C.model_all.save_weights(C.model_path)
 
                     new_row = {'mean_overlapping_bboxes':round(mean_overlapping_bboxes, 3), 
                             'class_acc':round(class_acc, 3), 
@@ -1511,7 +1511,7 @@ def model_init(C, classes_count):
     model_classifier.compile(optimizer=optimizer_classifier, loss=[class_loss_cls, class_loss_regr(len(classes_count)-1)], metrics={'dense_class_{}'.format(len(classes_count)): 'accuracy'})
     model_all.compile(optimizer='sgd', loss='mae')
 
-    return (model_all,record_df)
+    return (model_all, model_rpn, model_classifier, record_df)
 
 def display_after_training(C, record_df):
         

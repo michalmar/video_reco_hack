@@ -1,4 +1,4 @@
-from utils_train import get_data, get_anchor_gt, display_image, model_init, train, display_after_training, get_img_output_length
+from utils_train import get_data, get_anchor_gt, display_image, model_init, train, display_after_training, get_img_output_length, data_gen_train
 from utils_train import Config
 import os
 import time
@@ -116,7 +116,7 @@ display_image(X, Y, image_data, debug_img, debug_num_pos, C)
 
 # In[24]:
 
-(model_all,record_df) = model_init(C,classes_count)
+(C.model_all, C.model_rpn, C.model_classifier, record_df) = model_init(C,classes_count)
 # In[27]:
 
 
@@ -131,8 +131,8 @@ C.iter_num = 0
 C.total_epochs += C.num_epochs
 
 losses = np.zeros((C.epoch_length, 5))
-rpn_accuracy_rpn_monitor = []
-rpn_accuracy_for_epoch = []
+C.rpn_accuracy_rpn_monitor = []
+C.rpn_accuracy_for_epoch = []
 
 if len(record_df)==0:
     best_loss = np.Inf
@@ -148,7 +148,7 @@ print(len(record_df))
 
 # In[ ]:
 
-train(C)
+train(C, data_gen_train)
 
 # In[ ]:
 display_after_training(C, record_df)
