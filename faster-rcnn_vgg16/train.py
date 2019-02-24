@@ -150,7 +150,7 @@ print(len(record_df))
 
 # In[ ]:
 
-train(C, data_gen_train)
+record_df = train(C, data_gen_train, record_df)
 
 # In[ ]:
 display_after_training(C, record_df)

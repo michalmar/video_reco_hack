@@ -1281,7 +1281,7 @@ def display_image(X, Y, image_data, debug_img, debug_num_pos, C):
     plt.imshow(img)
     plt.show()
 
-def train(C, data_gen_train):
+def train(C, data_gen_train, record_df):
     start_time = time.time()
     for epoch_num in range(C.num_epochs):
 
@@ -1435,8 +1435,9 @@ def train(C, data_gen_train):
             except Exception as e:
                 print('Exception: {}'.format(e))
                 continue
-
+    
     print('Training complete, exiting.')
+    return record_df
 
 
 def model_init(C):
