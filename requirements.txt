@@ -1,3 +1,7 @@
 imutils==0.5.2
 opencv_python==4.0.0.21
 numpy==1.14.6
+tensorflow
+pandas
+scikit-learn
+keras
