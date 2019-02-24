@@ -1411,10 +1411,10 @@ def train(C, data_gen_train):
                     C.iter_num = 0
                     start_time = time.time()
 
-                    if curr_loss < best_loss:
+                    if curr_loss < C.best_loss:
                         if C.verbose:
-                            print('Total loss decreased from {} to {}, saving weights'.format(best_loss,curr_loss))
-                        best_loss = curr_loss
+                            print('Total loss decreased from {} to {}, saving weights'.format(C.best_loss,curr_loss))
+                        C.best_loss = curr_loss
                         C.model_all.save_weights(C.model_path)
 
                     new_row = {'mean_overlapping_bboxes':round(mean_overlapping_bboxes, 3), 
