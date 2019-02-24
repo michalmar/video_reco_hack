@@ -1294,7 +1294,7 @@ def train(C, data_gen_train):
             try:
 
                 if len(C.rpn_accuracy_rpn_monitor) == C.epoch_length and C.verbose:
-                    mean_overlapping_bboxes = float(sum(rpn_accuracy_rpn_monitor))/len(rpn_accuracy_rpn_monitor)
+                    mean_overlapping_bboxes = float(sum(C.rpn_accuracy_rpn_monitor))/len(C.rpn_accuracy_rpn_monitor)
                     C.rpn_accuracy_rpn_monitor = []
                     # print('Average number of overlapping bounding boxes from RPN = {} for {} previous iterations'.format(mean_overlapping_bboxes, epoch_length))
                     if mean_overlapping_bboxes == 0:
