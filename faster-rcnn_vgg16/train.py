@@ -116,7 +116,7 @@ display_image(X, Y, image_data, debug_img, debug_num_pos, C)
 
 # In[24]:
 
-model_all = model_init(C)
+model_all = model_init(C,classes_count)
 # In[27]:
 
 

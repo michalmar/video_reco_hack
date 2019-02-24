@@ -1439,7 +1439,7 @@ def train(C):
     print('Training complete, exiting.')
 
 
-def model_init(C):
+def model_init(C, classes_count):
 
     input_shape_img = (None, None, 3)
 
