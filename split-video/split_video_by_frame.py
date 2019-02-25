@@ -19,7 +19,7 @@ import os
 import datetime  
 import time
 
-vid_file = "videoplayback-320p-short"
+vid_file = "videoplayback-720p-short"
 # Playing video from file:
 cap = cv2.VideoCapture('../data/'+vid_file+'.mp4')
 
