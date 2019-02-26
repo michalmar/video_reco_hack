@@ -1,6 +1,7 @@
 data/
 data-subset/
 data-test/
+data-filtered-yolo/
 data-merged/
 yolo-object-detection/output/*.avi
 # yolo-object-detection/videos/
