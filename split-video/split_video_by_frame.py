@@ -19,7 +19,8 @@ import os
 import datetime  
 import time
 
-vid_file = "videoplayback-720p-short"
+# vid_file = "videoplayback-720p-short"
+vid_file = "videoplayback-720p"
 # Playing video from file:
 cap = cv2.VideoCapture('../data/'+vid_file+'.mp4')
 
@@ -44,10 +45,10 @@ myTime = datetime.datetime(2019, 2, 1)
 
 
 currentFrame = 0
-while(currentFrame < 800):
+while(currentFrame < 10000):
     # Capture frame-by-frame
     ret, frame = cap.read()
-    print("{} {}".format(currentFrame, currentFrame % 25))
+#     print("{} {}".format(currentFrame, currentFrame % 25))
     if (currentFrame % 25 == 0):
         myTime = myTime + datetime.timedelta(0,1) # days, seconds, then other fields.
     # Saves image of the current frame in jpg file
