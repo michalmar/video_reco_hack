@@ -1,8 +1,10 @@
-data/
-data-subset/
-data-test/
-data-filtered-yolo/
-data-merged/
+data/*.jpg
+data/*/*.jpg
+data/*/*/*
+
+data/*.zip
+data/*.mp4
+
 yolo-object-detection/output/*.avi
 # yolo-object-detection/videos/
 yolo-object-detection/images/
