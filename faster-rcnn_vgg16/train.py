@@ -126,7 +126,7 @@ X, Y, image_data, debug_img, debug_num_pos = next(data_gen_train)
 C.total_epochs = len(record_df)
 C.r_epochs = len(record_df)
 
-C.epoch_length = 227
+C.epoch_length = 215
 C.num_epochs = 20
 C.iter_num = 0
 
