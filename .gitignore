@@ -6,9 +6,19 @@ data/*.zip
 data/*.mp4
 
 faster-rcnn_vgg16/Dataset/*/*/*.jpg
+faster-rcnn_vgg16/model/
 
 
 yolo-object-detection/output/*.avi
 # yolo-object-detection/videos/
 yolo-object-detection/images/
 yolo-object-detection/yolo-coco/*.weights
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+# Jupyter Notebook
+.ipynb_checkpoints
+
