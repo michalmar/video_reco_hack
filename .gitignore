@@ -7,7 +7,7 @@ data/*.mp4
 
 faster-rcnn_vgg16/Dataset/*/*/*.jpg
 faster-rcnn_vgg16/model/
-
+faster-rcnn_vgg16/Dataset/airport/out/
 
 yolo-object-detection/output/*.avi
 # yolo-object-detection/videos/
