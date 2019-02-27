@@ -1,0 +1,19 @@
+
+
+azcopy --source ./faster-rcnn_vgg16/Dataset/airport/out/videoplayback-720p-scored.avi --destination https://sqlvargsnjo7cops7y.blob.core.windows.net/share/videoplayback-720p-scored.avi --dest-key xxxxxx
+
+https://sqlvargsnjo7cops7y.blob.core.windows.net/share/videoplayback-720p-scored.avi
+
+
+
+
+azcopy --source ./model_frcnn_vgg.hdf5 --destination https://sqlvargsnjo7cops7y.blob.core.windows.net/share/model_frcnn_vgg.hdf5 --dest-key xxxxxx
+azcopy --source ./record.csv --destination https://sqlvargsnjo7cops7y.blob.core.windows.net/share/record.csv --dest-key xxxxxx
+
+
+tar -zcvf test_all.tar.gz ./test_all
+azcopy --source ./test_all.tar.gz --destination https://sqlvargsnjo7cops7y.blob.core.windows.net/share/test_all.tar.gz --dest-key xxxxxx
+
+## all data
+tar -zcvf airport.tar.gz ./airport
+azcopy --source ./airport.tar.gz --destination https://sqlvargsnjo7cops7y.blob.core.windows.net/share/airport.tar.gz --dest-key xxxxxx
