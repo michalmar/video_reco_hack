@@ -20,14 +20,6 @@
 
     `pip install -r requirements.txt`
 
-1. run the sample
-    
-    `cd video_reco_hack/yolo-object-detection`
-
-    `wget https://pjreddie.com/media/files/yolov3.weights`
-
-    `python yolo_video.py --input videos/videoplayback-320p-short.mp4 --output output/videoplayback-320p-short.avi --yolo yolo-coco`
-
 ##  Faster-RCNN algo using VGG16 net
 all relevant code and aretefacts are in folder: `faster-rcnn_vgg16` -> every steps are with relative path to that{!}
 
@@ -45,7 +37,21 @@ assuming you have built your model
 interactive Jupyter notebook: [frcnn_test_vgg.ipynb](./frcnn_test_vgg.ipynb)
 
 
+## yolo v3 pre-trained coco video inference (only)
+
+1. run the sample
+    
+    `cd video_reco_hack/yolo-object-detection`
+
+    `wget https://pjreddie.com/media/files/yolov3.weights`
+
+    `python yolo_video.py --input videos/videoplayback-320p-short.mp4 --output output/videoplayback-320p-short.avi --yolo yolo-coco`
+
+
+
 ## TODO:
 - [ ] add luggage detection on belt
 - [x] create video from detections for all images 
 - [ ] train with additional data
+
+
